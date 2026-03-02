@@ -45,6 +45,31 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 
+// Windows compatibility for POSIX time functions
+#ifdef _WIN32
+#include <time.h>
+
+// Thread-safe localtime for Windows
+inline struct tm* localtime_r(const time_t* timer, struct tm* buf) {
+    localtime_s(buf, timer);
+    return buf;
+}
+
+// Thread-safe gmtime for Windows
+inline struct tm* gmtime_r(const time_t* timer, struct tm* buf) {
+    gmtime_s(buf, timer);
+    return buf;
+}
+
+// Simple strptime implementation for Windows (supports %Y-%m-%d format)
+inline char* strptime(const char* s, const char* format, struct tm* tm) {
+    std::istringstream ss(s);
+    ss >> std::get_time(tm, format);
+    if (ss.fail()) return nullptr;
+    return const_cast<char*>(s + ss.tellg());
+}
+#endif
+
 using json = nlohmann::json;
 using namespace std;
 
