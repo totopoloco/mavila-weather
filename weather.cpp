@@ -48,6 +48,13 @@
 using json = nlohmann::json;
 using namespace std;
 
+// Version information - use compile-time define if available
+#ifndef VERSION_STRING
+#define VERSION_STRING "1.0.0"
+#endif
+const string VERSION = VERSION_STRING;
+const string PROGRAM_NAME = "weather";
+
 /**
  * @brief CURL write callback function for handling HTTP response data
  * 
@@ -325,6 +332,8 @@ string getDayName(const string& dateStr) {
  * @param progName The program name (typically argv[0]) for usage display
  */
 void printHelp(const char* progName) {
+    cout << PROGRAM_NAME << " v" << VERSION << " - Command-line weather tool" << endl;
+    cout << endl;
     cout << "Usage: " << progName << " --latitude LAT --longitude LON [OPTIONS]" << endl;
     cout << "       " << progName << " --city CITY --country COUNTRY [OPTIONS]" << endl;
     cout << endl;
@@ -337,6 +346,7 @@ void printHelp(const char* progName) {
     cout << "  --daily            Show 10-day daily forecast" << endl;
     cout << "  --location         Show location details" << endl;
     cout << "  --sources          Show data source attribution" << endl;
+    cout << "  --version          Show version information" << endl;
     cout << "  --help             Show this help message and exit" << endl;
 }
 
@@ -375,6 +385,9 @@ int main(int argc, char* argv[]) {
 
         if (arg == "--help") {
             printHelp(argv[0]);
+            return 0;
+        } else if (arg == "--version") {
+            cout << PROGRAM_NAME << " v" << VERSION << endl;
             return 0;
         } else if (arg == "--latitude" && i + 1 < argc) {
             lat = argv[++i];

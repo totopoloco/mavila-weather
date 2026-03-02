@@ -5,6 +5,11 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 LDFLAGS = -Wl,-Bdynamic -lcurl
 
+# Version from git tags (sorted by version, falls back to 1.0.0 if no tags)
+GIT_VERSION := $(shell git tag -l 'v*' --sort=-v:refname 2>/dev/null | head -n1 | sed 's/^v//')
+VERSION := $(if $(GIT_VERSION),$(GIT_VERSION),1.0.0)
+CXXFLAGS += -DVERSION_STRING=\"$(VERSION)\"
+
 # Check for nlohmann-json location
 # On Debian/Ubuntu: libnlohmann-json3-dev
 # On Fedora/RHEL: nlohmann-json-devel
