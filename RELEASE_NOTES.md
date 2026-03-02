@@ -1,5 +1,9 @@
 # Release Notes
 
+## v1.0.10
+- Removed Windows native build (use WSL instead)
+- Windows users can install the .deb package via WSL
+
 ## v1.0.7
 - Added Debian package (.deb) support
 - Releases now include .deb package for easy installation on Debian/Ubuntu
@@ -51,7 +55,7 @@
 - **Daily Forecast**: 10-day forecast with min/max temperatures, conditions, and precipitation
 - **Location Details**: Reverse geocoding with coordinates, region, postal code, and timezone
 - **Flexible Input**: Query by city/country name or latitude/longitude coordinates
-- **Cross-Platform**: Available for Linux and Windows
+- **WSL Support**: Windows users can run via Windows Subsystem for Linux
 
 ## Data Sources
 
@@ -63,5 +67,5 @@
 
 Download the appropriate package for your platform:
 - **Debian/Ubuntu**: `weather_X.Y.Z-1_amd64.deb` - Install with `sudo dpkg -i weather_*.deb`
-- **Windows**: `weather-windows.zip` (extract and run `weather.exe`)
+- **Windows**: Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/) and install the .deb package
 - **Other Linux**: Build from source with `make && sudo make install`

@@ -9,7 +9,7 @@ A command-line weather tool written in C++ that fetches weather data from the [O
 - 10-day daily forecast with min/max temperatures
 - Location details from reverse geocoding
 - Support for city/country lookup or direct coordinates
-- Cross-platform: Linux and Windows binaries available
+- Windows users can run via WSL (Windows Subsystem for Linux)
 
 ## Dependencies
 
@@ -102,7 +102,7 @@ All data is provided free of charge for non-commercial use.
 
 Pre-built packages are available on the [Releases](https://github.com/totopoloco/mavila-weather/releases) page:
 - **Debian/Ubuntu**: `weather_X.Y.Z-1_amd64.deb` - Install with `sudo dpkg -i weather_*.deb`
-- **Windows**: `weather-windows.zip` (includes `weather.exe` and required DLLs)
+- **Windows**: Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/) and install the .deb package
 
 ## License
 
