@@ -9,6 +9,7 @@ A command-line weather tool written in C++ that fetches weather data from the [O
 - 10-day daily forecast with min/max temperatures
 - Location details from reverse geocoding
 - Support for city/country lookup or direct coordinates
+- Cross-platform: Linux and Windows binaries available
 
 ## Dependencies
 
@@ -87,6 +88,20 @@ sudo make install-completion
 # Get weather with all details for specific coordinates
 ./weather --latitude 48.8566 --longitude 2.3522 --hourly --daily --location
 ```
+
+## Data Sources
+
+- **Weather data**: [Open-Meteo API](https://open-meteo.com)
+- **Geocoding**: [Open-Meteo Geocoding API](https://open-meteo.com)
+- **Reverse geocoding**: [BigDataCloud](https://www.bigdatacloud.com)
+
+All data is provided free of charge for non-commercial use.
+
+## Downloads
+
+Pre-built binaries are available on the [Releases](https://github.com/totopoloco/mavila-weather/releases) page:
+- **Linux**: `weather` binary
+- **Windows**: `weather-windows.zip` (includes `weather.exe` and required DLLs)
 
 ## License
 

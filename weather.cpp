@@ -350,6 +350,32 @@ string getDayName(const string& dateStr) {
 }
 
 /**
+ * @brief Prints data source attribution
+ * 
+ * Displays the APIs used for weather and location data.
+ * 
+ * @param fancy If true, uses emojis, ANSI codes, and decorative formatting.
+ *              If false, uses simple text format suitable for help output.
+ */
+void printDataSources(bool fancy = false) {
+    if (fancy) {
+        cout << " Data Sources" << endl;
+        cout << " ──────────────────────────────────────────────────────────────────" << endl;
+        printf("  🌤\033[7G%-16s  %s\n", "Weather data:", "Open-Meteo API (https://open-meteo.com)");
+        printf("  🔍\033[7G%-16s  %s\n", "Geocoding:", "Open-Meteo Geocoding API (https://open-meteo.com)");
+        printf("  📍\033[7G%-16s  %s\n", "Reverse geocode:", "BigDataCloud (https://www.bigdatacloud.com)");
+        cout << endl;
+        cout << "  All data is provided free of charge for non-commercial use." << endl;
+        cout << endl;
+    } else {
+        cout << "Data Sources:" << endl;
+        cout << "  Weather data:      Open-Meteo API (https://open-meteo.com)" << endl;
+        cout << "  Geocoding:         Open-Meteo Geocoding API" << endl;
+        cout << "  Reverse geocode:   BigDataCloud (https://www.bigdatacloud.com)" << endl;
+    }
+}
+
+/**
  * @brief Prints the command-line help message
  * 
  * Displays usage information, available options, and examples to stdout.
@@ -373,6 +399,8 @@ void printHelp(const char* progName) {
     cout << "  --sources          Show data source attribution" << endl;
     cout << "  --version          Show version information" << endl;
     cout << "  --help             Show this help message and exit" << endl;
+    cout << endl;
+    printDataSources(false);
 }
 
 /**
@@ -746,14 +774,7 @@ int main(int argc, char* argv[]) {
     // All services are free for non-commercial use
     // =========================================================================
     if (showSources) {
-        cout << " Data Sources" << endl;
-        cout << " ──────────────────────────────────────────────────────────────────" << endl;
-        printf("  🌤\033[7G%-16s  %s\n", "Weather data:", "Open-Meteo API (https://open-meteo.com)");
-        printf("  🔍\033[7G%-16s  %s\n", "Geocoding:", "Open-Meteo Geocoding API (https://open-meteo.com)");
-        printf("  📍\033[7G%-16s  %s\n", "Reverse geocode:", "BigDataCloud (https://www.bigdatacloud.com)");
-        cout << endl;
-        cout << "  All data is provided free of charge for non-commercial use." << endl;
-        cout << endl;
+        printDataSources(true);
     }
 
     curl_global_cleanup();

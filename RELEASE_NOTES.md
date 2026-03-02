@@ -1,6 +1,12 @@
 # Release Notes
 
-## Features
+## v1.0.5
+
+### What's New
+- Data sources now displayed in `--help` output
+- Updated documentation
+
+### Features
 
 - **Current Weather**: Temperature, wind speed, and weather conditions with emoji indicators
 - **Hourly Forecast**: Next 6 hours with temperature, humidity, and wind data
@@ -9,13 +15,13 @@
 - **Flexible Input**: Query by city/country name or latitude/longitude coordinates
 - **Cross-Platform**: Available for Linux and Windows
 
-## Data Sources
+### Data Sources
 
 - Weather data: [Open-Meteo API](https://open-meteo.com)
 - Geocoding: [Open-Meteo Geocoding API](https://open-meteo.com)
 - Reverse geocoding: [BigDataCloud](https://www.bigdatacloud.com)
 
-## Installation
+### Installation
 
 Download the appropriate binary for your platform:
 - **Linux**: `weather` (make executable with `chmod +x weather`)
