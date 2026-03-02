@@ -1,0 +1,31 @@
+weather (1.0.7-1) unstable; urgency=medium
+
+  * Added Debian package support
+  * Refactored data sources into reusable function
+
+ -- mavila <mavila@example.com>  Mon, 02 Mar 2026 14:00:00 +0100
+
+weather (1.0.6-1) unstable; urgency=medium
+
+  * Refactored data sources into reusable printDataSources() function
+  * Data sources now displayed in --help output
+  * Updated README with downloads section and data sources
+
+ -- mavila <mavila@example.com>  Mon, 02 Mar 2026 13:30:00 +0100
+
+weather (1.0.5-1) unstable; urgency=medium
+
+  * Added Windows compatibility for POSIX time functions
+  * Cross-compilation for Windows now fully functional
+
+ -- mavila <mavila@example.com>  Mon, 02 Mar 2026 13:00:00 +0100
+
+weather (1.0.0-1) unstable; urgency=medium
+
+  * Initial release
+  * Current weather conditions with emoji indicators
+  * Hourly and daily forecasts
+  * Location details from reverse geocoding
+  * City/country lookup or direct coordinates
+
+ -- mavila <mavila@example.com>  Mon, 02 Mar 2026 12:00:00 +0100

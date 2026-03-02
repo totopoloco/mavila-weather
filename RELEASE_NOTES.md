@@ -1,5 +1,10 @@
 # Release Notes
 
+## v1.0.7
+- Added Debian package (.deb) support
+- Releases now include .deb package for easy installation on Debian/Ubuntu
+- Refactored data sources into reusable `printDataSources()` function
+
 ## v1.0.6
 - Refactored data sources into reusable `printDataSources()` function
 - Data sources now displayed in `--help` output
@@ -56,6 +61,7 @@
 
 ## Installation
 
-Download the appropriate binary for your platform:
-- **Linux**: `weather` (make executable with `chmod +x weather`)
+Download the appropriate package for your platform:
+- **Debian/Ubuntu**: `weather_X.Y.Z-1_amd64.deb` - Install with `sudo dpkg -i weather_*.deb`
 - **Windows**: `weather-windows.zip` (extract and run `weather.exe`)
+- **Other Linux**: Build from source with `make && sudo make install`

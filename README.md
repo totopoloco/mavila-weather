@@ -99,8 +99,8 @@ All data is provided free of charge for non-commercial use.
 
 ## Downloads
 
-Pre-built binaries are available on the [Releases](https://github.com/totopoloco/mavila-weather/releases) page:
-- **Linux**: `weather` binary
+Pre-built packages are available on the [Releases](https://github.com/totopoloco/mavila-weather/releases) page:
+- **Debian/Ubuntu**: `weather_X.Y.Z-1_amd64.deb` - Install with `sudo dpkg -i weather_*.deb`
 - **Windows**: `weather-windows.zip` (includes `weather.exe` and required DLLs)
 
 ## License

@@ -1,0 +1,18 @@
+Source: weather
+Section: utils
+Priority: optional
+Maintainer: mavila <mavila@example.com>
+Build-Depends: debhelper-compat (= 13), libcurl4-openssl-dev, nlohmann-json3-dev
+Standards-Version: 4.6.0
+Homepage: https://github.com/totopoloco/mavila-weather
+
+Package: weather
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Command-line weather tool
+ A command-line weather application that fetches weather data from
+ Open-Meteo API and location information from BigDataCloud reverse
+ geocoding service.
+ .
+ Features include current weather conditions, hourly and daily forecasts,
+ and detailed location information.
