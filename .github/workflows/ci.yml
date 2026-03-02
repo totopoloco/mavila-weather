@@ -79,6 +79,65 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  build-windows:
+    runs-on: ubuntu-latest
+    needs: build-ubuntu
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install MinGW and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mingw-w64 wget unzip
+
+      - name: Download curl for Windows
+        run: |
+          wget -q https://curl.se/windows/dl-8.5.0_1/curl-8.5.0_1-win64-mingw.zip
+          unzip -q curl-8.5.0_1-win64-mingw.zip
+          mv curl-8.5.0_1-win64-mingw curl-win64
+
+      - name: Download nlohmann-json
+        run: |
+          wget -q https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp
+          mkdir -p nlohmann
+          mv json.hpp nlohmann/
+
+      - name: Get version
+        run: |
+          LATEST_TAG=$(git tag -l 'v*' --sort=-v:refname | head -n1)
+          VERSION=${LATEST_TAG#v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Build for Windows
+        run: |
+          x86_64-w64-mingw32-g++ -std=c++17 -O2 \
+            -DVERSION_STRING=\"${{ env.VERSION }}\" \
+            -I./nlohmann -I./curl-win64/include \
+            -o weather.exe weather.cpp \
+            -L./curl-win64/lib -lcurl \
+            -lws2_32 -lwldap32 -lcrypt32 \
+            -static-libgcc -static-libstdc++
+
+      - name: Package Windows release
+        run: |
+          mkdir -p weather-windows
+          cp weather.exe weather-windows/
+          cp curl-win64/bin/*.dll weather-windows/
+          cp curl-win64/COPYING.txt weather-windows/CURL_LICENSE.txt
+          zip -r weather-windows.zip weather-windows
+
+      - name: Upload Windows binary to release
+        run: |
+          LATEST_TAG=$(git tag -l 'v*' --sort=-v:refname | head -n1)
+          gh release upload $LATEST_TAG ./weather-windows.zip --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build-fedora:
     runs-on: ubuntu-latest
     container: fedora:latest
