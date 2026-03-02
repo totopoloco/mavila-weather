@@ -88,6 +88,7 @@ sudo make install-completion
 # Get weather with all details for specific coordinates
 ./weather --latitude 48.8566 --longitude 2.3522 --hourly --daily --location
 ```
+<img width="1323" height="948" alt="image" src="https://github.com/user-attachments/assets/ccb0493d-48a4-4c29-beff-d64daea42e41" />
 
 ## Data Sources
 
