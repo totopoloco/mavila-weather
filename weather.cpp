@@ -42,6 +42,8 @@
 #include <algorithm>
 #include <cctype>
 #include <cstdio>
+#include <cwchar>
+#include <clocale>
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 
@@ -188,6 +190,60 @@ string toLower(const string& str) {
     transform(result.begin(), result.end(), result.begin(),
               [](unsigned char c) { return tolower(c); });
     return result;
+}
+
+/**
+ * @brief Returns the terminal display width of a Unicode codepoint.
+ */
+int codepointWidth(uint32_t cp) {
+    // Zero-width: variation selectors, ZWJ, combining marks
+    if ((cp >= 0x0300 && cp <= 0x036F) ||
+        (cp >= 0x1AB0 && cp <= 0x1AFF) ||
+        (cp >= 0x1DC0 && cp <= 0x1DFF) ||
+        (cp >= 0x20D0 && cp <= 0x20FF) ||
+        (cp >= 0xFE00 && cp <= 0xFE0F) ||
+        (cp >= 0xE0100 && cp <= 0xE01EF) ||
+        cp == 0x200D || cp == 0x200B || cp == 0x200C || cp == 0x200E || cp == 0x200F ||
+        cp == 0xFEFF)
+        return 0;
+    int w = wcwidth(static_cast<wchar_t>(cp));
+    return (w < 0) ? 0 : w;
+}
+
+/**
+ * @brief Decodes one UTF-8 codepoint from a string.
+ */
+int decodeUtf8(const char* s, uint32_t& cp) {
+    unsigned char c = (unsigned char)s[0];
+    if (c < 0x80)      { cp = c; return 1; }
+    if (c < 0xE0)      { cp = (c & 0x1F) << 6 | (s[1] & 0x3F); return 2; }
+    if (c < 0xF0)      { cp = (c & 0x0F) << 12 | (s[1] & 0x3F) << 6 | (s[2] & 0x3F); return 3; }
+    cp = (c & 0x07) << 18 | (s[1] & 0x3F) << 12 | (s[2] & 0x3F) << 6 | (s[3] & 0x3F); return 4;
+}
+
+/**
+ * @brief Returns the display width of a UTF-8 string in terminal columns.
+ */
+int displayWidth(const string& str) {
+    int w = 0;
+    const char* s = str.c_str();
+    while (*s) {
+        uint32_t cp;
+        int bytes = decodeUtf8(s, cp);
+        w += codepointWidth(cp);
+        s += bytes;
+    }
+    return w;
+}
+
+/**
+ * @brief Pads a UTF-8 string with spaces to reach a target display width.
+ */
+string padRight(const string& str, int targetWidth) {
+    int w = displayWidth(str);
+    int padding = targetWidth - w;
+    if (padding <= 0) return str;
+    return str + string(padding, ' ');
 }
 
 /**
@@ -426,6 +482,8 @@ void printHelp(const char* progName) {
  * - BigDataCloud Reverse Geocode: https://api.bigdatacloud.net/data/reverse-geocode-client
  */
 int main(int argc, char* argv[]) {
+    setlocale(LC_CTYPE, "");
+
     // Command-line argument storage
     string lat, lon, cityArg, countryArg;
     
@@ -647,12 +705,12 @@ int main(int argc, char* argv[]) {
     cout << endl;
     cout << "  Weather for: " << city << ", " << country << endl;
     cout << endl;
-    cout << "  " << wmoEmoji(weatherCode) << "\033[7G" << wmoText(weatherCode) << endl;
-    cout << "  🌡\033[7GTemperature:  " << fixed << setprecision(1) << currentTemp << " °C" << endl;
-    cout << "  💨\033[7GWind Speed:  " << fixed << setprecision(1) << currentWind << " km/h" << endl;
+    cout << "  " << padRight(wmoEmoji(weatherCode), 4) << wmoText(weatherCode) << endl;
+    cout << "  " << padRight("🌡️", 4) << "Temperature:  " << fixed << setprecision(1) << currentTemp << " °C" << endl;
+    cout << "  " << padRight("💨", 4) << "Wind Speed:   " << fixed << setprecision(1) << currentWind << " km/h" << endl;
     cout << endl;
-    printf("  🕐\033[7G%-22s  %s\n", ("Local time (" + remoteTzAbbr + "):").c_str(), remoteTime.c_str());
-    printf("  🏠\033[7G%-22s  %s\n", ("Your time  (" + localTz + "):").c_str(), localTime.c_str());
+    printf("  %s%-22s  %s\n", padRight("🕐", 4).c_str(), ("Local time (" + remoteTzAbbr + "):").c_str(), remoteTime.c_str());
+    printf("  %s%-22s  %s\n", padRight("🏠", 4).c_str(), ("Your time  (" + localTz + "):").c_str(), localTime.c_str());
     cout << endl;
 
     // =========================================================================

@@ -1,9 +1,17 @@
+weather (1.0.11-1) unstable; urgency=medium
+
+  * Fixed emoji alignment in terminal output
+  * Replaced ANSI escape codes with dynamic Unicode-aware padding
+  * Added UTF-8 display width calculation using system wcwidth()
+
+ -- mavila <github.tightness@avilac.cc>  Sun, 08 Mar 2026 00:30:00 +0100
+
 weather (1.0.7-1) unstable; urgency=medium
 
   * Added Debian package support
   * Refactored data sources into reusable function
 
- -- mavila <mavila@example.com>  Mon, 02 Mar 2026 14:00:00 +0100
+ -- mavila <github.tightness@avilac.cc>  Mon, 02 Mar 2026 14:00:00 +0100
 
 weather (1.0.6-1) unstable; urgency=medium
 
@@ -11,14 +19,14 @@ weather (1.0.6-1) unstable; urgency=medium
   * Data sources now displayed in --help output
   * Updated README with downloads section and data sources
 
- -- mavila <mavila@example.com>  Mon, 02 Mar 2026 13:30:00 +0100
+ -- mavila <github.tightness@avilac.cc>  Mon, 02 Mar 2026 13:30:00 +0100
 
 weather (1.0.5-1) unstable; urgency=medium
 
   * Added Windows compatibility for POSIX time functions
   * Cross-compilation for Windows now fully functional
 
- -- mavila <mavila@example.com>  Mon, 02 Mar 2026 13:00:00 +0100
+ -- mavila <github.tightness@avilac.cc>  Mon, 02 Mar 2026 13:00:00 +0100
 
 weather (1.0.0-1) unstable; urgency=medium
 
@@ -28,4 +36,4 @@ weather (1.0.0-1) unstable; urgency=medium
   * Location details from reverse geocoding
   * City/country lookup or direct coordinates
 
- -- mavila <mavila@example.com>  Mon, 02 Mar 2026 12:00:00 +0100
+ -- mavila <github.tightness@avilac.cc>  Mon, 02 Mar 2026 12:00:00 +0100
