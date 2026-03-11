@@ -1,10 +1,10 @@
 weather (1.0.11-1) unstable; urgency=medium
 
-  * Fixed emoji alignment in terminal output
-  * Replaced ANSI escape codes with dynamic Unicode-aware padding
-  * Added UTF-8 display width calculation using system wcwidth()
+  * Fixed emoji alignment in basic output (current weather section)
+  * Uses ANSI absolute cursor positioning for consistent alignment
+  * Columns align correctly across local and SSH terminals
 
- -- mavila <github.tightness@avilac.cc>  Sun, 08 Mar 2026 00:30:00 +0100
+ -- mavila <github.tightness@avilac.cc>  Wed, 11 Mar 2026 16:15:00 +0100
 
 weather (1.0.7-1) unstable; urgency=medium
 

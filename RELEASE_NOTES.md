@@ -1,10 +1,9 @@
 # Release Notes
 
 ## v1.0.11
-- Fixed emoji alignment in terminal output
-- Replaced ANSI escape codes (\033[nG) with dynamic Unicode-aware padding
-- Added UTF-8 display width calculation using system wcwidth()
-- Text columns now align correctly regardless of emoji display width
+- Fixed emoji alignment in basic output (current weather section)
+- Uses ANSI absolute cursor positioning for consistent alignment across local and SSH terminals
+- Text columns now align correctly regardless of terminal emoji rendering width
 
 ## v1.0.10
 - Removed Windows native build (use WSL instead)
