@@ -705,12 +705,12 @@ int main(int argc, char* argv[]) {
     cout << endl;
     cout << "  Weather for: " << city << ", " << country << endl;
     cout << endl;
-    cout << "  " << padRight(wmoEmoji(weatherCode), 4) << wmoText(weatherCode) << endl;
-    cout << "  " << padRight("🌡️", 4) << "Temperature:  " << fixed << setprecision(1) << currentTemp << " °C" << endl;
-    cout << "  " << padRight("💨", 4) << "Wind Speed:   " << fixed << setprecision(1) << currentWind << " km/h" << endl;
+    cout << "  " << wmoEmoji(weatherCode) << "\033[6G" << wmoText(weatherCode) << endl;
+    cout << "  🌡️ \033[6GTemperature:  " << fixed << setprecision(1) << currentTemp << " °C" << endl;
+    cout << "  💨 \033[6GWind Speed:   " << fixed << setprecision(1) << currentWind << " km/h" << endl;
     cout << endl;
-    printf("  %s%-22s  %s\n", padRight("🕐", 4).c_str(), ("Local time (" + remoteTzAbbr + "):").c_str(), remoteTime.c_str());
-    printf("  %s%-22s  %s\n", padRight("🏠", 4).c_str(), ("Your time  (" + localTz + "):").c_str(), localTime.c_str());
+    printf("  🕐 \033[6G%-22s  %s\n", ("Local time (" + remoteTzAbbr + "):").c_str(), remoteTime.c_str());
+    printf("  🏠 \033[6G%-22s  %s\n", ("Your time  (" + localTz + "):").c_str(), localTime.c_str());
     cout << endl;
 
     // =========================================================================
