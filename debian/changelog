@@ -1,3 +1,11 @@
+weather (1.0.13-1) unstable; urgency=medium
+
+  * Fixed emoji alignment inconsistency between local and SSH terminals
+  * Unified ANSI cursor positioning to column 7 across all sections
+  * Consistent rendering on mobile SSH clients (e.g. Termius)
+
+ -- mavila <github.tightness@avilac.cc>  Fri, 13 Mar 2026 15:00:00 +0100
+
 weather (1.0.11-1) unstable; urgency=medium
 
   * Fixed emoji alignment in basic output (current weather section)

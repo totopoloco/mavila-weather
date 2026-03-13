@@ -1,5 +1,10 @@
 # Release Notes
 
+## v1.0.13
+- Fixed emoji alignment inconsistency between local and SSH terminals (e.g. Termius on Android)
+- Unified ANSI cursor positioning to column 7 across all output sections
+- Removed space between emoji and escape code for consistent rendering
+
 ## v1.0.11
 - Fixed emoji alignment in basic output (current weather section)
 - Uses ANSI absolute cursor positioning for consistent alignment across local and SSH terminals
