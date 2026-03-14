@@ -1,5 +1,12 @@
 # Release Notes
 
+## v1.0.15
+- Compacted current weather and time information into a single unified block
+- Removed separate "Time Information" section header and extra blank lines
+- Timezone abbreviation now displayed after the time value (e.g. `2026-03-15 16:30 (IST)`)
+- Added separator line under location header for cleaner visual structure
+- **Versioning note:** Starting from this release, version numbers will increment sequentially (1.0.15, 1.0.16, ...). Previous gaps in version numbers (e.g. 1.0.8, 1.0.9, 1.0.12, 1.0.14) were due to CI/CD pipeline iterations that did not include user-facing changes.
+
 ## v1.0.13
 - Fixed emoji alignment inconsistency between local and SSH terminals (e.g. Termius on Android)
 - Unified ANSI cursor positioning to column 7 across all output sections
